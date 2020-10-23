@@ -4,7 +4,7 @@ shopt -s extglob
 namePattern="^[A-Z][a-z]{2,}$"
 emailPattern="^[a-zA-Z]{1,}([.]?[a-zA-Z]{1,})?[@]{1}[a-zA-Z]{1,}[.]{1}[a-z]{2,3}([.]?[a-z]{2})?$"
 mobilePattern="^([0-9]{2}\s{1}[0-9]{10})$"
-passwordPattern="([a-z0-9]*[A-Z])|([A-Z][0-9]*)$"
+passwordPattern="^([a-zA-Z]*[0-9]+[a-z0-9]*[A-Z])|([A-Z][a-z0-9]*+[0-9][a-zA-Z]*)$"
 
 checkFirstName()
 {
@@ -18,19 +18,19 @@ checkFirstName()
 checkLastName()
 {
 	read -p "Enter Last Name " lastname
-	if [[ $lastname =~ $namePattern ]]; then
-		echo Valid Last Name
-	else
-		echo Invalid Last Name
-	fi
+   if [[ $lastname =~ $namePattern ]]; then
+      echo Valid Last Name
+   else
+      echo Invalid Last Name
+   fi
 }
 checkEmail()
 {
 	read -p "Enter Email-id " email
 	if [[ $email =~ $emailPattern ]]; then
-   		echo Valid Email-Id
+   	echo Valid Email-Id
 	else
-   		echo Invalid Email-Id
+   	echo Invalid Email-Id
 	fi
 }
 checkMobileNumber()
@@ -38,20 +38,20 @@ checkMobileNumber()
 	echo "Enter Mobile Number With Country Code "
 	read mobile
 	if [[ $mobile =~ $mobilePattern ]]; then
-      	echo Valid Mobile Number
-   	else
-      	echo Invalid Mobile Number
-   	fi
+      echo Valid Mobile Number
+   else
+      echo Invalid Mobile Number
+   fi
 }
 checkPassword()
 {
    read -p "Enter password " password
 	if [[ ${#password} -ge 8 ]]; then
-	   	if [[ $password =~ $passwordPattern ]]; then
-	      	echo Valid Password
-	   	else
-	      	echo Invalid Password
-	   	fi
+   	if [[ $password =~ $passwordPattern ]]; then
+      	echo Valid Password
+   	else
+      	echo Invalid Password
+   	fi
 	else
 		echo Password Should Be Min 8 Chars Long
 	fi
