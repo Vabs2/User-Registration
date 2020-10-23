@@ -1,11 +1,6 @@
 #!/bin/bash -x
 shopt -s extglob
 
-# @ Description: User Registration Problem
-# @ Author: Akshay Dhananjay Barve
-# @ Version: 18.04.3 lts
-# @ Since: 18th March 2020 / Wednesday
-
 namePattern="^[A-Z][a-z]{2,}$"
 emailPattern="^[a-zA-Z]{1,}([.]?[a-zA-Z]{1,})?[@]{1}[a-zA-Z]{1,}[.]{1}[a-z]{2,3}([.]?[a-z]{2})?$"
 mobilePattern="^([0-9]{2}\s{1}[0-9]{10})$"
