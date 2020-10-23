@@ -1,17 +1,13 @@
 #!/bin/bash -x
 shopt -s extglob
 
-read -p "Enter First Name " firstname
-read -p "Enter Last Name " lastname
-read -p "Enter Email-id " email
-
 namePattern="^[A-Z][a-z]{2,}$"
-emailPattern="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?\$"
+emailPattern="^[a-zA-Z]{1,}([.]?[a-zA-Z]{1,})?[@]{1}[a-zA-Z]{1,}[.]{1}[a-z]{2,3}([.]?[a-z]{2})?$"
+mobilePattern="^([0-9]{2}\s{1}[0-9]{10})$"
 
 checkFirstName()
 {
-	firstname=$1
-
+	read -p "Enter First Name " firstname
 	if [[ $firstname =~ $namePattern ]]
 	then
 		echo Valid First Name
@@ -21,8 +17,7 @@ checkFirstName()
 }
 checkLastName()
 {
-	lastname=$1
-
+	read -p "Enter Last Name " lastname
    if [[ $lastname =~ $namePattern ]]
    then
       echo Valid Last Name
@@ -32,8 +27,7 @@ checkLastName()
 }
 checkEmail()
 {
-	email=$1
-
+	read -p "Enter Email-id " email
 	if [[ $email =~ $emailPattern ]]
 	then
    	echo Valid Email-Id
@@ -41,6 +35,19 @@ checkEmail()
    	echo Invalid Email-Id
 	fi
 }
-checkFirstName $firstname
-checkLastName $lastname
-checkEmail $email
+checkMobileNumber()
+{
+	echo "Enter Mobile Number With Country Code " 
+	read mobile
+	if [[ $mobile =~ $mobilePattern ]]
+   then
+      echo Valid Mobile Number
+   else
+      echo Invalid Mobile Number
+   fi
+
+}
+checkFirstName
+checkLastName
+checkEmail
+checkMobileNumber
