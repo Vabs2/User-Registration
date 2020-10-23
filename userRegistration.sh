@@ -2,9 +2,8 @@
 shopt -s extglob
 
 namePattern="^[A-Z][a-z]{2,}$"
-emailPattern="^[a-zA-Z]{1,}([.]?[a-zA-Z]{1,})?[@]{1}[a-zA-Z]{1,}[.]{1}[a-z]{2,3}([.]?[a-z]{2})?$"
+emailPattern="^[a-zA-Z0-9]{1,}([.]?[-]?[+]?[a-zA-Z0-9]{1,})?[@]{1}[a-zA-Z0-9]{1,}[.]{1}[a-z]{2,3}([.]?[a-z]{2})?$"
 mobilePattern="^([0-9]{2}\s{1}[0-9]{10})$"
-
 checkFirstName()
 {
 	read -p "Enter First Name " firstname
@@ -44,22 +43,21 @@ checkMobileNumber()
 }
 checkPassword()
 {
-	read -p "please enter password:" pass
-	count=`echo ${#pass}`
+read -p "please enter password:" pass
+count=`echo ${#pass}`
+if [[ $count -lt 8 ]];then
+echo "Password length should be 8 charactore"
+exit 1;
+fi
+echo $pass | grep "[A-Z]" | grep "[a-z]" | grep "[0-9]" | grep "[@#$%^&*]"
 
-	if [[ $count -lt 8 ]];then
-		echo "Password length should be 8 charactore"
-	exit 1;
-	fi
-		echo $pass | grep "[A-Z]" | grep "[a-z]" | grep "[0-9]" | grep "[@#$%^&*]"
+if [[ $? -ne 0 ]];then
 
-	if [[ $? -ne 0 ]];then
-
-		echo "Password Must contain upparcase ,lowecase,number and special charactor"
-	exit 2;
-	else
-   		echo "password is valid"
-	fi
+echo "Password Must contain upparcase ,lowecase,number and special charactor"
+exit 2;
+else
+   echo "password is valid"
+fi
 }
 checkFirstName
 checkLastName
